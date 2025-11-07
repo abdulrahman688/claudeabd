@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shop handmade Aleppo soap by Syrian widows. Premium quality, ethical production, ancient tradition.">
+    <title>Shop | Zenobia's Legacy</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .shop-header {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            padding: 5rem 0 3rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .shop-header h1 {
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .shop-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+
+        .filters-sidebar {
+            background: #F5F5DC;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .filter-option label {
+            cursor: pointer;
+        }
+
+        .shop-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #F5F5DC;
+        }
+
+        .results-count {
+            color: #666;
+        }
+
+        .sort-dropdown {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #D4AF37;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .product-grid-shop {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .shop-container {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-sidebar {
+                position: static;
+            }
+
+            .product-grid-shop {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-crown"></i>
+                        <span>ZENOBIA'S LEGACY</span>
+                    </a>
+                </div>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="story.html">Our Story</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <button class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <div class="container">
+            <h1>Our Collection</h1>
+            <p>Handmade with love, aged with patience, sold with purpose</p>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <section class="section">
+        <div class="container">
+            <div class="shop-container">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3>Collection</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="classic" value="Classic Collection" class="filter-category">
+                            <label for="classic">Classic Collection</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="premium" value="Premium Collection" class="filter-category">
+                            <label for="premium">Premium Collection</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="essential" value="Essential Collection" class="filter-category">
+                            <label for="essential">Essential Collection</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="therapeutic" value="Therapeutic Collection" class="filter-category">
+                            <label for="therapeutic">Therapeutic Collection</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Price Range</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="price1" value="0-3" class="filter-price">
+                            <label for="price1">Under €3</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="price2" value="3-4" class="filter-price">
+                            <label for="price2">€3 - €4</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="price3" value="4-5" class="filter-price">
+                            <label for="price3">€4 - €5</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary btn-block" onclick="resetFilters()">Reset Filters</button>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="products-main">
+                    <div class="shop-controls">
+                        <div class="results-count" id="resultsCount">Showing 6 products</div>
+                        <select class="sort-dropdown" id="sortDropdown">
+                            <option value="default">Sort by: Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+
+                    <div class="product-grid-shop" id="productGrid">
+                        <!-- Products will be rendered here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown"></i>
+                        <span>ZENOBIA'S LEGACY</span>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Syrian widows through traditional Aleppo soap-making. From Palmyra's heritage, by Syria's hands.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="shop.html#classic">Classic Collection</a></li>
+                        <li><a href="shop.html#premium">Premium Collection</a></li>
+                        <li><a href="shop.html#sets">Gift Sets</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="story.html">Our Story</a></li>
+                        <li><a href="impact.html">Our Impact</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html#faq">FAQs</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zenobia's Legacy. All rights reserved. Made with <i class="fas fa-heart"></i> for Syrian women empowerment.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Your cart is empty</p>
+                <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+            </div>
+        </div>
+
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <span class="subtotal-amount" id="subtotalAmount">€0.00</span>
+            </div>
+            <a href="cart.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+            <button class="btn btn-secondary btn-block" id="continueShopping">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Shop-specific JavaScript
+        let allProducts = [];
+        let filteredProducts = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            initFilters();
+            initSort();
+        });
+
+        function loadProducts() {
+            // Get all products
+            allProducts = Object.values(window.PRODUCTS);
+            filteredProducts = [...allProducts];
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem;">No products found matching your criteria.</p>';
+                resultsCount.textContent = 'No products found';
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const card = createProductCard(product);
+                grid.appendChild(card);
+            });
+
+            resultsCount.textContent = `Showing ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`;
+        }
+
+        function createProductCard(product) {
+            const div = document.createElement('div');
+            div.className = 'product-card fade-up';
+
+            const badge = product.id === 1 ? '<div class="product-badge">Bestseller</div>' :
+                          product.id === 2 ? '<div class="product-badge new">New</div>' : '';
+
+            div.innerHTML = `
+                ${badge}
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='images/placeholder.jpg'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-category">${product.category}</p>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-footer">
+                        <span class="product-price">€${product.price.toFixed(2)}</span>
+                        <button class="btn-add-cart" data-product-id="${product.id}">
+                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Add event listener to add to cart button
+            const addBtn = div.querySelector('.btn-add-cart');
+            addBtn.addEventListener('click', function() {
+                const productId = parseInt(this.getAttribute('data-product-id'));
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Added!';
+                this.style.backgroundColor = '#6B8E23';
+                this.style.borderColor = '#6B8E23';
+
+                window.addToCart(productId);
+
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.backgroundColor = '';
+                    this.style.borderColor = '';
+                }, 1000);
+            });
+
+            return div;
+        }
+
+        function initFilters() {
+            const categoryFilters = document.querySelectorAll('.filter-category');
+            const priceFilters = document.querySelectorAll('.filter-price');
+
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+
+            priceFilters.forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+        }
+
+        function applyFilters() {
+            const selectedCategories = Array.from(document.querySelectorAll('.filter-category:checked'))
+                .map(cb => cb.value);
+
+            const selectedPriceRanges = Array.from(document.querySelectorAll('.filter-price:checked'))
+                .map(cb => cb.value);
+
+            filteredProducts = allProducts.filter(product => {
+                // Category filter
+                const categoryMatch = selectedCategories.length === 0 ||
+                                    selectedCategories.includes(product.category);
+
+                // Price filter
+                let priceMatch = selectedPriceRanges.length === 0;
+                if (!priceMatch) {
+                    selectedPriceRanges.forEach(range => {
+                        const [min, max] = range.split('-').map(Number);
+                        if (product.price >= min && product.price < max) {
+                            priceMatch = true;
+                        }
+                    });
+                }
+
+                return categoryMatch && priceMatch;
+            });
+
+            renderProducts();
+        }
+
+        function initSort() {
+            const sortDropdown = document.getElementById('sortDropdown');
+            if (sortDropdown) {
+                sortDropdown.addEventListener('change', function() {
+                    const sortValue = this.value;
+                    sortProducts(sortValue);
+                });
+            }
+        }
+
+        function sortProducts(sortBy) {
+            switch(sortBy) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                default:
+                    // Default order (by ID)
+                    filteredProducts.sort((a, b) => a.id - b.id);
+            }
+            renderProducts();
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('.filter-category, .filter-price').forEach(cb => {
+                cb.checked = false;
+            });
+            document.getElementById('sortDropdown').value = 'default';
+            filteredProducts = [...allProducts];
+            sortProducts('default');
+        }
+    </script>
+</body>
+</html>
