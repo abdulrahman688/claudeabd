@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة النهضة السورية - رحلة من الشفاء إلى النهضة</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Navigation Header -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
+            <i class="fas fa-seedling text-white text-xl"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">منصة النهضة</h1>
+            <p class="text-xs text-gray-600">رحلتك من الشفاء إلى النهضة 🌸</p>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="text-gray-700 hover:text-green-600 transition font-semibold">الرئيسية</a>
+          <a href="#about" class="text-gray-700 hover:text-green-600 transition font-semibold">عن المنصة</a>
+          <a href="#book" class="text-gray-700 hover:text-green-600 transition font-semibold">الحلم السوري</a>
+          <a href="#modules" class="text-gray-700 hover:text-green-600 transition font-semibold">البرامج</a>
+        </div>
+
+        <!-- Auth Buttons -->
+        <div class="flex items-center gap-3">
+          <button onclick="window.location.href='login.html'"
+                  class="px-6 py-2 text-green-600 hover:text-green-700 font-semibold transition">
+            تسجيل الدخول
+          </button>
+          <button onclick="window.location.href='register.html'"
+                  class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold shadow-md">
+            ابدأ الآن
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20 fade-in" id="home">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+
+        <!-- Badge -->
+        <div class="inline-block mb-6">
+          <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold">
+            ✨ منصة التحول الشامل للسوريين
+          </span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+          من الألم إلى الأمل
+          <br/>
+          <span class="text-yellow-300">من الشفاء إلى النهضة</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
+          رحلة تحول كاملة تأخذك من التعافي النفسي، إلى التعلم، إلى الكسب.
+          <br/>
+          مع كتاب "الحلم السوري" - بيانك للوعي ودليلك للنهضة.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="window.location.href='register.html'"
+                  class="btn-pulse w-full sm:w-auto px-8 py-4 bg-white text-green-700 rounded-lg font-bold text-lg shadow-xl hover:shadow-2xl transition">
+            <i class="fas fa-rocket ml-2"></i>
+            ابدأ رحلتك الآن
+          </button>
+          <button onclick="window.location.href='book.html'"
+                  class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white/10 transition">
+            <i class="fas fa-book-open ml-2"></i>
+            اقرأ عن الحلم السوري
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto">
+          <div class="text-center">
+            <div class="text-4xl font-black mb-2">1,234</div>
+            <div class="text-white/80">مستخدم نشط</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-black mb-2">89%</div>
+            <div class="text-white/80">نسبة النجاح</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-black mb-2">4.8★</div>
+            <div class="text-white/80">التقييم</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-white" id="about">
+    <div class="container mx-auto px-4">
+
+      <!-- Section Header -->
+      <div class="text-center mb-16 fade-in">
+        <span class="text-green-600 font-bold text-sm uppercase tracking-wider">المراحل الثلاث</span>
+        <h2 class="text-4xl font-black text-gray-900 mt-2 mb-4">رحلة متكاملة للتحول</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          نظام ثلاثي متكامل يأخذك من الشفاء إلى التعلم إلى الكسب
+        </p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Feature 1: Healing -->
+        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 border border-green-200">
+          <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-heart text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">🕊️ مرحلة الشفاء</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            ابدأ رحلتك بالتعافي النفسي من خلال تمارين التنفس، التأمل، وبناء الوعي بالذات.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-green-600 mt-1"></i>
+              <span class="text-gray-700">تمارين تنفس يومية</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-green-600 mt-1"></i>
+              <span class="text-gray-700">جلسات تأمل موجّه</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-green-600 mt-1"></i>
+              <span class="text-gray-700">مساعد AI "شام" 🌸</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Feature 2: Learning -->
+        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 border border-blue-200">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-graduation-cap text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">📚 مرحلة التعلم</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            اكتسب مهارات عملية تمكّنك من العمل عن بُعد.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-blue-600 mt-1"></i>
+              <span class="text-gray-700">دورات عملية مركّزة</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-blue-600 mt-1"></i>
+              <span class="text-gray-700">مشاريع تطبيقية</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-blue-600 mt-1"></i>
+              <span class="text-gray-700">شهادات معتمدة</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Feature 3: Earning -->
+        <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-8 border border-yellow-200">
+          <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-briefcase text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">💼 مرحلة الكسب</h3>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            ابدأ العمل وتحقيق دخل حقيقي من خلال منصتنا.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-yellow-600 mt-1"></i>
+              <span class="text-gray-700">وظائف عن بُعد</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-yellow-600 mt-1"></i>
+              <span class="text-gray-700">دفع آمن</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check text-yellow-600 mt-1"></i>
+              <span class="text-gray-700">دعم مستمر</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Section -->
+  <section class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white" id="book">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Book Cover -->
+        <div class="fade-in">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-yellow-500 rounded-3xl blur-3xl opacity-30"></div>
+            <div class="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border-2 border-yellow-500/30">
+              <div class="aspect-[3/4] bg-gradient-to-br from-green-700 to-green-900 rounded-2xl shadow-2xl flex items-center justify-center">
+                <div class="text-center p-8">
+                  <i class="fas fa-book text-yellow-400 text-6xl mb-4"></i>
+                  <h3 class="text-3xl font-black text-white">الحلم السوري</h3>
+                  <p class="text-yellow-300 mt-2">بيان الوعي</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Details -->
+        <div class="fade-in">
+          <span class="text-yellow-400 font-bold text-sm uppercase tracking-wider">الكتاب الأساسي</span>
+          <h2 class="text-4xl md:text-5xl font-black mt-2 mb-6">
+            الحلم السوري
+            <br/>
+            <span class="text-yellow-400">بيان الوعي ودليل النهضة</span>
+          </h2>
+
+          <p class="text-xl text-gray-300 leading-relaxed mb-6">
+            رحلة فكرية وعملية تجمع بين الفلسفة والواقع، بين الألم والأمل.
+          </p>
+
+          <!-- Book Stats -->
+          <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+              <div class="text-2xl font-bold text-yellow-400">350</div>
+              <div class="text-sm text-gray-400">صفحة</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+              <div class="text-2xl font-bold text-yellow-400">9</div>
+              <div class="text-sm text-gray-400">فصول</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+              <div class="text-2xl font-bold text-yellow-400">4.8★</div>
+              <div class="text-sm text-gray-400">التقييم</div>
+            </div>
+          </div>
+
+          <!-- Price & CTA -->
+          <div class="flex items-center gap-4 mb-8">
+            <div class="text-4xl font-black text-yellow-400">$15.00</div>
+            <div class="text-gray-400 line-through">$25.00</div>
+            <div class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">خصم 40%</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button onclick="window.location.href='book.html'"
+                    class="btn-pulse px-8 py-4 bg-yellow-500 text-gray-900 rounded-lg font-bold text-lg shadow-xl hover:bg-yellow-400 transition">
+              <i class="fas fa-shopping-cart ml-2"></i>
+              اشترِ الآن
+            </button>
+            <button onclick="window.location.href='book.html#preview'"
+                    class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white/10 transition">
+              <i class="fas fa-eye ml-2"></i>
+              معاينة مجانية
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-green-600 font-bold text-sm uppercase tracking-wider">قصص النجاح</span>
+        <h2 class="text-4xl font-black text-gray-900 mt-2 mb-4">ماذا يقول مستخدمونا</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Testimonial 1 -->
+        <div class="card-hover bg-white rounded-2xl p-8 shadow-lg">
+          <div class="flex items-center gap-1 text-yellow-400 mb-4">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            "المنصة غيرت حياتي تماماً. بدأت من الصفر، والآن أعمل كمساعد افتراضي."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">أ</div>
+            <div>
+              <div class="font-bold text-gray-900">أحمد محمود</div>
+              <div class="text-sm text-gray-600">من حلب</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="card-hover bg-white rounded-2xl p-8 shadow-lg">
+          <div class="flex items-center gap-1 text-yellow-400 mb-4">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            "كتاب 'الحلم السوري' كان نقطة تحول. ساعدني أفهم نفسي وأبدأ رحلة الشفاء."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">ف</div>
+            <div>
+              <div class="font-bold text-gray-900">فاطمة علي</div>
+              <div class="text-sm text-gray-600">من دمشق</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="card-hover bg-white rounded-2xl p-8 shadow-lg">
+          <div class="flex items-center gap-1 text-yellow-400 mb-4">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            "التعلم كان سهل وعملي. بعد شهرين فقط، بدأت أستقبل عروض عمل."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold">م</div>
+            <div>
+              <div class="font-bold text-gray-900">محمد خالد</div>
+              <div class="text-sm text-gray-600">من حمص</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-green-600 to-green-800 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">هل أنت مستعد لبدء رحلتك؟</h2>
+      <p class="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
+        انضم إلى آلاف السوريين الذين بدأوا رحلة التحول من الشفاء إلى النهضة
+      </p>
+      <button onclick="window.location.href='register.html'"
+              class="btn-pulse px-12 py-5 bg-white text-green-700 rounded-lg font-bold text-xl shadow-2xl hover:shadow-3xl transition">
+        <i class="fas fa-rocket ml-2"></i>
+        ابدأ مجاناً الآن
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+
+        <!-- About -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">عن المنصة</h3>
+          <p class="text-gray-400 leading-relaxed">
+            منصة النهضة السورية - رحلة متكاملة من الشفاء إلى التعلم إلى الكسب
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">الرئيسية</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">البرامج</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">الحلم السوري</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">المجتمع</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">الدعم</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">الأسئلة الشائعة</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">تواصل معنا</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">سياسة الخصوصية</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">الشروط والأحكام</a></li>
+          </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">تابعنا</h3>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-full flex items-center justify-center transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-full flex items-center justify-center transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-full flex items-center justify-center transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-full flex items-center justify-center transition">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2025 منصة النهضة السورية. جميع الحقوق محفوظة. Built with ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
