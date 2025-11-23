@@ -1,0 +1,119 @@
+_format_version: "3.0"
+
+services:
+  - name: user-service
+    url: http://user-service:3001
+    routes:
+      - name: user-routes
+        paths:
+          - /api/v1/auth
+          - /api/v1/users
+          - /api/v1/wallet
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          hour: 10000
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
+          max_age: 3600
+
+  - name: project-service
+    url: http://project-service:3002
+    routes:
+      - name: project-routes
+        paths:
+          - /api/v1/projects
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 200
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
+
+  - name: investment-service
+    url: http://investment-service:3003
+    routes:
+      - name: investment-routes
+        paths:
+          - /api/v1/investments
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
+
+  - name: payment-service
+    url: http://payment-service:3004
+    routes:
+      - name: payment-routes
+        paths:
+          - /api/v1/payments
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 50
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
+
+  - name: ai-service
+    url: http://ai-service:8000
+    routes:
+      - name: ai-routes
+        paths:
+          - /api/v1/ai
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 30
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
+
+  - name: blockchain-service
+    url: http://blockchain-service:3005
+    routes:
+      - name: blockchain-routes
+        paths:
+          - /api/v1/blockchain
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 20
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          credentials: true
