@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="See the impact of Zenobia's Legacy - empowering Syrian widows through soap-making.">
+    <title>Our Impact | Zenobia's Legacy</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            padding: 8rem 0 4rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .women-stories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .woman-card {
+            background: #F5F5DC;
+            border-left: 4px solid #D4AF37;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .woman-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .woman-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .woman-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .woman-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: #000;
+        }
+
+        .woman-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .woman-quote {
+            font-style: italic;
+            color: #000;
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid #D4AF37;
+        }
+
+        .woman-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .woman-stat {
+            text-align: center;
+            padding: 1rem;
+            background: #fff;
+        }
+
+        .woman-stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        .woman-stat-label {
+            font-size: 0.875rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .transparency-section {
+            background: #F5F5DC;
+        }
+
+        .transparency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .transparency-card {
+            background: #fff;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .transparency-card h3 {
+            color: #D4AF37;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-crown"></i>
+                        <span>ZENOBIA'S LEGACY</span>
+                    </a>
+                </div>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="impact.html" class="active">Impact</a></li>
+                    <li><a href="story.html">Our Story</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <button class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Impact</h1>
+            <p>Every bar of soap creates ripples of change</p>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="impact-stats section dark-section">
+        <div class="container">
+            <h2 class="section-title light">By The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">Women Employed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <div class="stat-number" data-target="450">0</div>
+                    <div class="stat-label">Soaps Made Monthly</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="stat-number" data-target="40">0</div>
+                    <div class="stat-label">Children Supported</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <div class="stat-number" data-target="85">0</div>
+                    <div class="stat-label">Avg. Monthly Income</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Women's Stories -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Artisans</h2>
+            <p class="section-subtitle">Real women, real stories, real impact</p>
+
+            <div class="women-stories">
+                <!-- Woman 1 -->
+                <div class="woman-card">
+                    <div class="woman-header">
+                        <div class="woman-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="woman-info">
+                            <h3>Fatima, 42</h3>
+                            <p>Mother of 4 • Damascus</p>
+                        </div>
+                    </div>
+                    <p><strong>Before:</strong> "I struggled to feed my children after losing my husband. I felt helpless and afraid."</p>
+                    <p><strong>After:</strong> "Now I earn €85/month making soap. My oldest daughter is back in school. I have hope again."</p>
+                    <div class="woman-quote">
+                        "I'm not just making soap. I'm building a future for my children."
+                    </div>
+                    <div class="woman-stats">
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">€85</div>
+                            <div class="woman-stat-label">Monthly Income</div>
+                        </div>
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">4</div>
+                            <div class="woman-stat-label">Children Supported</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Woman 2 -->
+                <div class="woman-card">
+                    <div class="woman-header">
+                        <div class="woman-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="woman-info">
+                            <h3>Aisha, 38</h3>
+                            <p>Mother of 3 • Damascus</p>
+                        </div>
+                    </div>
+                    <p><strong>Before:</strong> "After the war, I had no income and three children to feed. I was desperate."</p>
+                    <p><strong>After:</strong> "Making soap gave me dignity. I'm proud to use my hands to create something beautiful."</p>
+                    <div class="woman-quote">
+                        "This isn't charity. This is work. This is pride."
+                    </div>
+                    <div class="woman-stats">
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">€90</div>
+                            <div class="woman-stat-label">Monthly Income</div>
+                        </div>
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">3</div>
+                            <div class="woman-stat-label">Children Supported</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Woman 3 -->
+                <div class="woman-card">
+                    <div class="woman-header">
+                        <div class="woman-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="woman-info">
+                            <h3>Layla, 35</h3>
+                            <p>Mother of 2 • Damascus</p>
+                        </div>
+                    </div>
+                    <p><strong>Before:</strong> "I was alone with two young children and no skills. Every day was a struggle."</p>
+                    <p><strong>After:</strong> "I learned an ancient craft. Now I teach my daughter. We're preserving our heritage."</p>
+                    <div class="woman-quote">
+                        "My hands create more than soap—they create hope."
+                    </div>
+                    <div class="woman-stats">
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">€80</div>
+                            <div class="woman-stat-label">Monthly Income</div>
+                        </div>
+                        <div class="woman-stat">
+                            <div class="woman-stat-value">2</div>
+                            <div class="woman-stat-label">Children Supported</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Transparency -->
+    <section class="transparency-section section">
+        <div class="container">
+            <h2 class="section-title">Financial Transparency</h2>
+            <p class="section-subtitle">Where your money goes</p>
+
+            <div class="transparency-grid">
+                <div class="transparency-card">
+                    <h3>70%</h3>
+                    <p><strong>Women's Wages</strong></p>
+                    <p>Direct payment to artisans</p>
+                </div>
+
+                <div class="transparency-card">
+                    <h3>15%</h3>
+                    <p><strong>Materials</strong></p>
+                    <p>Olive oil, laurel oil, supplies</p>
+                </div>
+
+                <div class="transparency-card">
+                    <h3>10%</h3>
+                    <p><strong>Operations</strong></p>
+                    <p>Facility, equipment, training</p>
+                </div>
+
+                <div class="transparency-card">
+                    <h3>5%</h3>
+                    <p><strong>Marketing</strong></p>
+                    <p>Reaching more customers</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">Every euro you spend creates €0.70 in direct income for Syrian widows.</p>
+                <a href="shop.html" class="btn btn-primary large">Support Our Women</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown"></i>
+                        <span>ZENOBIA'S LEGACY</span>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Syrian widows through traditional Aleppo soap-making.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="story.html">Our Story</a></li>
+                        <li><a href="impact.html">Our Impact</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zenobia's Legacy. Made with <i class="fas fa-heart"></i> for Syrian women empowerment.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <span class="subtotal-amount" id="subtotalAmount">€0.00</span>
+            </div>
+            <a href="cart.html" class="btn btn-primary btn-block">Checkout</a>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

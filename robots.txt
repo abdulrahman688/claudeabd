@@ -1,0 +1,22 @@
+# Robots.txt for Zenobia's Legacy
+# https://zenobiaslegacy.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://zenobiaslegacy.com/sitemap.xml
+
+# Disallow admin or private directories (if any in future)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines to crawl
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
