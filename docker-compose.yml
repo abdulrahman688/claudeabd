@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  ai-video-agent:
+    build: .
+    container_name: ai-video-agent
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=${DEBUG:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - ELEVENLABS_VOICE_ID=${ELEVENLABS_VOICE_ID:-pNInz6obpgDQGcFmaJgB}
+      - ELEVENLABS_MODEL_ID=${ELEVENLABS_MODEL_ID:-eleven_multilingual_v2}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-3-5-sonnet-20241022}
+      - VIDEO_WIDTH=${VIDEO_WIDTH:-1080}
+      - VIDEO_HEIGHT=${VIDEO_HEIGHT:-1920}
+      - VIDEO_FPS=${VIDEO_FPS:-30}
+      - VIDEO_DURATION=${VIDEO_DURATION:-15}
+      - ZOOM_FACTOR=${ZOOM_FACTOR:-1.15}
+    volumes:
+      - ./app/static/temp:/app/app/static/temp
+      - ./ai_video_agent.db:/app/ai_video_agent.db
+      - ./ai_video_agent.log:/app/ai_video_agent.log
+    restart: unless-stopped
+    env_file:
+      - .env
