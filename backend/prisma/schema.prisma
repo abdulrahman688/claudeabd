@@ -1,0 +1,469 @@
+// Syrian Renaissance Platform - Database Schema
+// This schema defines the complete data model for the SRP platform
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector"), uuidOssp(map: "uuid-ossp")]
+}
+
+// ============================================
+// USER MANAGEMENT
+// ============================================
+
+model User {
+  id            String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  username      String    @unique @db.VarChar(50)
+  phone         String?   @db.VarChar(20)
+  passwordHash  String    @map("password_hash") @db.VarChar(255)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  lastLogin     DateTime? @map("last_login")
+  isActive      Boolean   @default(true) @map("is_active")
+  language      String    @default("ar") @db.VarChar(2)
+
+  // Location information
+  country       String?   @db.VarChar(50)
+  city          String?   @db.VarChar(50)
+  isDisplaced   Boolean   @default(false) @map("is_displaced")
+
+  // Settings
+  notificationEnabled Boolean @default(true) @map("notification_enabled")
+  darkMode      Boolean   @default(false) @map("dark_mode")
+
+  // Relations
+  profile       UserProfile?
+  progress      Progress[]
+  chatMessages  ChatMessage[]
+  shamMemory    ShamMemory[]
+  userModules   UserModule[]
+  jobApplications JobApplication[]
+  groupMembers  GroupMember[]
+  groupMessages GroupMessage[]
+  achievements  UserAchievement[]
+
+  @@map("users")
+}
+
+model UserProfile {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @unique @map("user_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal information
+  avatarUrl       String?   @map("avatar_url") @db.VarChar(255)
+  bio             String?   @db.Text
+  birthYear       Int?      @map("birth_year")
+  gender          String?   @db.VarChar(20)
+
+  // User status
+  currentPhase    String    @default("healing") @map("current_phase") @db.VarChar(20)
+  phaseStartDate  DateTime? @map("phase_start_date") @db.Date
+  daysActive      Int       @default(0) @map("days_active")
+  streakDays      Int       @default(0) @map("streak_days")
+  longestStreak   Int       @default(0) @map("longest_streak")
+
+  // Psychological assessments
+  initialWellbeingScore Int? @map("initial_wellbeing_score")
+  currentWellbeingScore Int? @map("current_wellbeing_score")
+  lastAssessmentDate    DateTime? @map("last_assessment_date")
+
+  // Skills and interests (stored as JSON arrays)
+  skills          Json      @default("[]")
+  interests       Json      @default("[]")
+  learningStyle   String?   @map("learning_style") @db.VarChar(20)
+
+  // Goals
+  goals           Json      @default("[]")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@map("user_profiles")
+}
+
+model Progress {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Daily tracking
+  date            DateTime  @db.Date
+  ritualCompleted Boolean   @default(false) @map("ritual_completed")
+  moodRating      Int?      @map("mood_rating")
+  sleepQuality    Int?      @map("sleep_quality")
+  energyLevel     Int?      @map("energy_level")
+
+  // Activities
+  modulesCompleted Json     @default("[]") @map("modules_completed")
+  exercisesDone   Json      @default("[]") @map("exercises_done")
+  chatMessagesCount Int     @default(0) @map("chat_messages_count")
+
+  // Notes
+  notes           String?   @db.Text
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  @@unique([userId, date])
+  @@map("progress")
+}
+
+// ============================================
+// LEARNING MODULES
+// ============================================
+
+model Module {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  // Classification
+  phase           String    @db.VarChar(20)
+  category        String    @db.VarChar(50)
+
+  // Content
+  titleAr         String    @map("title_ar") @db.VarChar(255)
+  titleEn         String?   @map("title_en") @db.VarChar(255)
+  descriptionAr   String?   @map("description_ar") @db.Text
+  descriptionEn   String?   @map("description_en") @db.Text
+  contentType     String    @map("content_type") @db.VarChar(20)
+  contentUrl      String?   @map("content_url") @db.VarChar(500)
+  durationMinutes Int?      @map("duration_minutes")
+
+  // Ordering and prerequisites
+  orderIndex      Int       @map("order_index")
+  prerequisites   Json      @default("[]")
+  difficultyLevel Int       @default(1) @map("difficulty_level")
+
+  // Text content
+  textContent     String?   @map("text_content") @db.Text
+
+  // Media
+  videoUrl        String?   @map("video_url") @db.VarChar(500)
+  audioUrl        String?   @map("audio_url") @db.VarChar(500)
+  thumbnailUrl    String?   @map("thumbnail_url") @db.VarChar(500)
+
+  // Interactive
+  hasQuiz         Boolean   @default(false) @map("has_quiz")
+  quizQuestions   Json?     @map("quiz_questions")
+
+  // Tracking
+  completionRate  Float     @default(0) @map("completion_rate")
+  averageRating   Float     @default(0) @map("average_rating")
+
+  isActive        Boolean   @default(true) @map("is_active")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  userModules     UserModule[]
+
+  @@map("modules")
+}
+
+model UserModule {
+  id                String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId            String    @map("user_id") @db.Uuid
+  moduleId          String    @map("module_id") @db.Uuid
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module            Module    @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  // Status
+  status            String    @default("not_started") @db.VarChar(20)
+  progressPercentage Int      @default(0) @map("progress_percentage")
+
+  // Timing
+  startedAt         DateTime? @map("started_at")
+  completedAt       DateTime? @map("completed_at")
+  lastAccessedAt    DateTime? @map("last_accessed_at")
+
+  // Rating
+  rating            Int?
+  feedback          String?   @db.Text
+
+  // Results
+  quizScore         Int?      @map("quiz_score")
+  attemptsCount     Int       @default(0) @map("attempts_count")
+
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  @@unique([userId, moduleId])
+  @@map("user_modules")
+}
+
+// ============================================
+// SHAM AI ASSISTANT
+// ============================================
+
+model ChatMessage {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Content
+  role            String    @db.VarChar(10)
+  content         String    @db.Text
+  contentType     String    @default("text") @map("content_type") @db.VarChar(20)
+
+  // Metadata
+  metadata        Json      @default("{}")
+
+  // Context
+  conversationId  String?   @map("conversation_id") @db.Uuid
+  parentMessageId String?   @map("parent_message_id") @db.Uuid
+  parentMessage   ChatMessage? @relation("MessageReplies", fields: [parentMessageId], references: [id])
+  replies         ChatMessage[] @relation("MessageReplies")
+
+  // Status
+  isRead          Boolean   @default(false) @map("is_read")
+  sentiment       String?   @db.VarChar(20)
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([conversationId])
+  @@index([createdAt(sort: Desc)])
+  @@map("chat_messages")
+}
+
+model ShamMemory {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Memory type
+  memoryType      String    @map("memory_type") @db.VarChar(50)
+
+  // Content
+  content         String    @db.Text
+  context         Json      @default("{}")
+
+  // Importance
+  importance      String    @default("medium") @db.VarChar(20)
+
+  // Vector embedding for semantic search (1536 dimensions for OpenAI ada-002)
+  embedding       Unsupported("vector(1536)")?
+
+  // Recall tracking
+  recalledCount   Int       @default(0) @map("recalled_count")
+  lastRecalledAt  DateTime? @map("last_recalled_at")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  expiresAt       DateTime? @map("expires_at")
+
+  @@map("sham_memory")
+}
+
+// ============================================
+// JOB MARKETPLACE
+// ============================================
+
+model Job {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  // Job information
+  titleAr         String    @map("title_ar") @db.VarChar(255)
+  titleEn         String?   @map("title_en") @db.VarChar(255)
+  descriptionAr   String    @map("description_ar") @db.Text
+  descriptionEn   String?   @map("description_en") @db.Text
+
+  // Classification
+  category        String    @db.VarChar(50)
+  difficultyLevel String    @default("easy") @map("difficulty_level") @db.VarChar(20)
+  requiredSkills  Json      @default("[]") @map("required_skills")
+
+  // Payment
+  paymentAmount   Decimal   @map("payment_amount") @db.Decimal(10, 2)
+  paymentCurrency String    @default("USD") @map("payment_currency") @db.VarChar(3)
+  paymentType     String    @default("fixed") @map("payment_type") @db.VarChar(20)
+
+  // Timing
+  deadline        DateTime? @db.Date
+  estimatedHours  Int?      @map("estimated_hours")
+
+  // Status
+  status          String    @default("open") @db.VarChar(20)
+  slotsAvailable  Int       @default(1) @map("slots_available")
+  slotsFilled     Int       @default(0) @map("slots_filled")
+
+  // Client/Partner
+  clientName      String?   @map("client_name") @db.VarChar(255)
+  clientRating    Float?    @map("client_rating")
+  isVerifiedClient Boolean  @default(false) @map("is_verified_client")
+
+  // Tracking
+  viewsCount      Int       @default(0) @map("views_count")
+  applicationsCount Int     @default(0) @map("applications_count")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  isActive        Boolean   @default(true) @map("is_active")
+
+  // Relations
+  applications    JobApplication[]
+
+  @@map("jobs")
+}
+
+model JobApplication {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  jobId           String    @map("job_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job             Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  // Application
+  coverLetter     String?   @map("cover_letter") @db.Text
+  proposedTimeline String?  @map("proposed_timeline") @db.VarChar(255)
+  portfolioUrl    String?   @map("portfolio_url") @db.VarChar(500)
+
+  // Status
+  status          String    @default("pending") @db.VarChar(20)
+
+  // Rating (after completion)
+  completionRating Int?     @map("completion_rating")
+  clientFeedback  String?   @map("client_feedback") @db.Text
+
+  // Payments
+  paymentStatus   String    @default("unpaid") @map("payment_status") @db.VarChar(20)
+  paymentDate     DateTime? @map("payment_date")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@unique([userId, jobId])
+  @@map("job_applications")
+}
+
+// ============================================
+// COMMUNITY
+// ============================================
+
+model CommunityGroup {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  // Information
+  nameAr          String    @map("name_ar") @db.VarChar(255)
+  nameEn          String?   @map("name_en") @db.VarChar(255)
+  descriptionAr   String?   @map("description_ar") @db.Text
+  descriptionEn   String?   @map("description_en") @db.Text
+  icon            String?   @db.VarChar(50)
+
+  // Type
+  groupType       String    @map("group_type") @db.VarChar(20)
+  category        String?   @db.VarChar(50)
+
+  // Statistics
+  membersCount    Int       @default(0) @map("members_count")
+  maxMembers      Int       @default(100) @map("max_members")
+
+  // Settings
+  isPrivate       Boolean   @default(false) @map("is_private")
+  requiresApproval Boolean  @default(true) @map("requires_approval")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  isActive        Boolean   @default(true) @map("is_active")
+
+  // Relations
+  members         GroupMember[]
+  messages        GroupMessage[]
+
+  @@map("community_groups")
+}
+
+model GroupMember {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  groupId         String    @map("group_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group           CommunityGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  // Status
+  status          String    @default("pending") @db.VarChar(20)
+  role            String    @default("member") @db.VarChar(20)
+
+  // Activity
+  messagesCount   Int       @default(0) @map("messages_count")
+  lastActiveAt    DateTime? @map("last_active_at")
+
+  joinedAt        DateTime  @default(now()) @map("joined_at")
+
+  @@unique([userId, groupId])
+  @@map("group_members")
+}
+
+model GroupMessage {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  groupId         String    @map("group_id") @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  group           CommunityGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Content
+  content         String    @db.Text
+  contentType     String    @default("text") @map("content_type") @db.VarChar(20)
+  attachments     Json      @default("[]")
+
+  // Interaction
+  reactions       Json      @default("{}")
+  repliesCount    Int       @default(0) @map("replies_count")
+  parentMessageId String?   @map("parent_message_id") @db.Uuid
+  parentMessage   GroupMessage? @relation("MessageReplies", fields: [parentMessageId], references: [id])
+  replies         GroupMessage[] @relation("MessageReplies")
+
+  // Moderation
+  isFlagged       Boolean   @default(false) @map("is_flagged")
+  isDeleted       Boolean   @default(false) @map("is_deleted")
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+  editedAt        DateTime? @map("edited_at")
+
+  @@map("group_messages")
+}
+
+// ============================================
+// GAMIFICATION
+// ============================================
+
+model Achievement {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  // Information
+  nameAr          String    @map("name_ar") @db.VarChar(255)
+  nameEn          String?   @map("name_en") @db.VarChar(255)
+  descriptionAr   String?   @map("description_ar") @db.Text
+  descriptionEn   String?   @map("description_en") @db.Text
+  icon            String?   @db.VarChar(50)
+
+  // Requirements
+  category        String    @db.VarChar(50)
+  requirementType String    @map("requirement_type") @db.VarChar(50)
+  requirementValue Int      @map("requirement_value")
+
+  // Level
+  level           Int       @default(1)
+  points          Int       @default(10)
+
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  // Relations
+  userAchievements UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  achievementId   String    @map("achievement_id") @db.Uuid
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement     Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  unlockedAt      DateTime  @default(now()) @map("unlocked_at")
+
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
